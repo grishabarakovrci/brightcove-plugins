@@ -73,6 +73,7 @@
       if (requestUri) {
         var requestUriParts = requestUri.split('/');
         requestUriParts = removeEmptyElements(requestUriParts);
+        queryString += 'domain=' + (typeof requestUriParts[2] !== 'undefined' ? requestUriParts[2] : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
         queryString += 'page=' + requestUriParts.join(',') + '&';
       }
