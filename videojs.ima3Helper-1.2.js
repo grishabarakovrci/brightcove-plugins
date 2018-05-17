@@ -60,23 +60,25 @@
 
       var queryString = '';
       var requestUri = '';
+      var requestUrl = '';
 
       var amp_url = getParameterByName('linkbaseurl'); //currently assuming that if linkbaseurk is found its an amp page.
       if (amp_url) {
         queryString += 'environment=googleamp&';
         var urlobj = parseUrl(amp_url);
         requestUri = urlobj.pathname; //since its an amp page lets get the path from the linkbaseurl;
+        requestUrl = urlobj.host;
       } else {
         requestUri = getRequestUri();
+        requestUrl = getRequestUrl();
       }
 
       if (requestUri) {
         var requestUriParts = requestUri.split('/');
         requestUriParts = removeEmptyElements(requestUriParts);
         
-        var fullUrl = getRequestUrl();
-        var urlParts = fullUrl.replace('http://','').replace('https://','').split(/[/?#]/);
-        
+        var urlParts = requestUrl.replace('http://','').replace('https://','').split(/[/?#]/);
+        console.log(requestUrl+' --- '+urlParts[0]+' --- '+urlParts[1]);
         queryString += 'domain=' + (typeof urlParts[0] !== 'undefined' ? urlParts[0] : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
         queryString += 'page=' + requestUriParts.join(',') + '&';
@@ -166,17 +168,17 @@
 
     var getRequestUrl = function getRequestUrl() {
       var inIframe = isInIframe();
-      var domainUrl = window.location.href;
+      var requestUrl = window.location.href;
 
       if (inIframe) {
         try {
-          domainUrl = document.referrer;
+          requestUrl = document.referrer;
         } catch (e) {
           // to catch cross-origin issues.
-          domainUrl = ''; // setting it to false, so as to not report wrong values.
+          requestUrl = ''; // setting it to false, so as to not report wrong values.
         }
       }
-      return domainUrl;
+      return requestUrl;
     };
 
     var getRequestUri = function getRequestUri() {
