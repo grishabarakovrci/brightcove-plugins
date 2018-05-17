@@ -78,7 +78,7 @@
         requestUriParts = removeEmptyElements(requestUriParts);
         
         var urlParts = requestUrl.replace('http://','').replace('https://','').split(/[/?#]/);
-        console.log(requestUrl+' --- '+urlParts[0]+' --- '+urlParts[1]);
+        
         queryString += 'domain=' + (typeof urlParts[0] !== 'undefined' ? urlParts[0] : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
         queryString += 'page=' + requestUriParts.join(',') + '&';
