@@ -67,7 +67,7 @@
         queryString += 'environment=googleamp&';
         var urlobj = parseUrl(amp_url);
         requestUri = urlobj.pathname; //since its an amp page lets get the path from the linkbaseurl;
-        requestUrl = urlobj.host;
+        requestUrl = urlobj.hostname;
       } else {
         requestUri = getRequestUri();
         requestUrl = getRequestUrl();
