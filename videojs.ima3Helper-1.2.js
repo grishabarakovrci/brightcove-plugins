@@ -74,13 +74,14 @@
       }
 
       if (requestUri || requestUrl) {
-        
+
         var requestUriParts = requestUri.split('/');
         requestUriParts = removeEmptyElements(requestUriParts);
         
         var urlParts = requestUrl.replace('http://','').replace('https://','').split(/[/?#]/);
-        
-        queryString += 'domain=' + (typeof urlParts[0] !== 'undefined' ? urlParts[0] : '') + '&';
+        urlParts = urlParts.split('.');
+        var domainURL = urlParts[1] + '.' + urlParts[2];
+        queryString += 'domain=' + (typeof domainURL !== 'undefined' ? domainURL : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
         queryString += 'page=' + requestUriParts.join(',') + '&';
       }
