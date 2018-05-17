@@ -73,7 +73,8 @@
         requestUrl = getRequestUrl();
       }
 
-      if (requestUri) {
+      if (requestUri || requestUrl) {
+        
         var requestUriParts = requestUri.split('/');
         requestUriParts = removeEmptyElements(requestUriParts);
         
