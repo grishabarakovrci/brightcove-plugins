@@ -73,7 +73,11 @@
       if (requestUri) {
         var requestUriParts = requestUri.split('/');
         requestUriParts = removeEmptyElements(requestUriParts);
-        queryString += 'domain=' + (typeof requestUriParts[2] !== 'undefined' ? requestUriParts[2] : '') + '&';
+        
+        var fullUrl = getRequestUrl();
+        var urlParts = fullUrl.replace('http://','').replace('https://','').split(/[/?#]/);
+        
+        queryString += 'domain=' + (typeof urlParts[0] !== 'undefined' ? urlParts[0] : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
         queryString += 'page=' + requestUriParts.join(',') + '&';
       }
@@ -158,6 +162,21 @@
         return window.adUtility;
       }
       return false;
+    };
+
+    var getRequestUrl = function getRequestUrl() {
+      var inIframe = isInIframe();
+      var domainUrl = window.location.href;
+
+      if (inIframe) {
+        try {
+          domainUrl = document.referrer;
+        } catch (e) {
+          // to catch cross-origin issues.
+          domainUrl = ''; // setting it to false, so as to not report wrong values.
+        }
+      }
+      return domainUrl;
     };
 
     var getRequestUri = function getRequestUri() {
