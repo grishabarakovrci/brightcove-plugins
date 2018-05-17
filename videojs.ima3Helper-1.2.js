@@ -79,8 +79,8 @@
         requestUriParts = removeEmptyElements(requestUriParts);
         
         var urlParts = requestUrl.replace('http://','').replace('https://','').split(/[/?#]/);
-        urlParts = urlParts.split('.');
-        var domainURL = urlParts[1] + '.' + urlParts[2];
+        var urlParts_temp = urlParts.split('.');
+        var domainURL = urlParts_temp[1] + '.' + urlParts_temp[2];
         queryString += 'domain=' + (typeof domainURL !== 'undefined' ? domainURL : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
         queryString += 'page=' + requestUriParts.join(',') + '&';
