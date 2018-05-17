@@ -76,9 +76,8 @@
         
         var fullUrl = getRequestUrl();
         var urlParts = fullUrl.replace('http://','').replace('https://','').split(/[/?#]/);
-        var domainUri = urlParts[0];
         
-        queryString += 'domain=' + domainUri + '&';
+        queryString += 'domain=' + (typeof urlParts[0] !== 'undefined' ? urlParts[0] : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
         queryString += 'page=' + requestUriParts.join(',') + '&';
       }
