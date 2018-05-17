@@ -79,7 +79,7 @@
         requestUriParts = removeEmptyElements(requestUriParts);
         
         var urlParts = requestUrl.replace('http://','').replace('https://','').split(/[/?#]/);
-        var urlParts_temp = urlParts.split('.');
+        var urlParts_temp = urlParts[0].split('.');
         var domainURL = urlParts_temp[1] + '.' + urlParts_temp[2];
         queryString += 'domain=' + (typeof domainURL !== 'undefined' ? domainURL : '') + '&';
         queryString += 'section=' + (typeof requestUriParts[0] !== 'undefined' ? requestUriParts[0] : '') + '&';
